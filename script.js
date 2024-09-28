@@ -1,23 +1,25 @@
 // // Create a reference to the HTML Objects
-const container = document.querySelector("#container");
+const buttonContainer = document.querySelector("#button-container");
+const sketchContainer = document.querySelector("#sketch-container");
 const button = document.createElement("button");
+button.textContent = "Press to enter the new grid size!"
+buttonContainer.appendChild(button);
 
-
-
-
-
+button.addEventListener("click", enterGridSize);
 
 let matrix = [];
 
 let row = 16;
 let colum = 16;
 
-for (var i = 1; i <= row; i++) {
+// FIX ROW IS NOT REALLY ROW JET!
+
+for (let i = 1; i <= row; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
-    container.appendChild(row);
+    sketchContainer.appendChild(row);
     matrix[i] = [];
-    for (var j = 1; j <= colum; j++) {
+    for (let j = 1; j <= colum; j++) {
         const squareDiv = document.createElement("div");
         squareDiv.classList.add("squareDiv");
         row.appendChild(squareDiv);
@@ -25,8 +27,10 @@ for (var i = 1; i <= row; i++) {
     }
 }
 
+function enterGridSize() {
+    let input = prompt("Please enter a gridlength!");
+}
 
-container.appendChild(button);
 
 
 
