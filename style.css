@@ -11,10 +11,7 @@
     padding: 8px;
     border: 4px solid blue;
     display: flex;
-}
-
-.row {
-    flex: 1;
+    flex-direction: row;
 }
 
 .squareDiv {
@@ -24,6 +21,7 @@
     border: 2px solid green;
     height: 35px;
     width: 35px; 
+    flex: 1;
 }
 
 .squareDiv:hover {
