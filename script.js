@@ -15,16 +15,19 @@ let columns = rows = gridlength;
 let currentSquareDiv = "squareDivId" + 1;
 let mouseOverSquareDiv;
 let input = 10;
+let rgba = "rgba(255,0,0,1)";
+let opacity = 1;
 
 button.addEventListener("click", refreshGrid);
 
-function getRandomRGB() {
+function getRandomRGBA() {
     const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
     const r = randomBetween(0, 255);
     const g = randomBetween(0, 255);
     const b = randomBetween(0, 255);
-    const rgb = `rgb(${r},${g},${b})`;
-    return rgb;
+    rgba = `rgba(${r},${g},${b},${opacity})`;
+    console.log(rgba);
+    return rgba;
 }
 
 function createGrid(gridlength) {
@@ -63,8 +66,9 @@ window.addEventListener('mouseover', (e) => {
         currentElementId === "html" || currentElementId === "awesomeButton") {
         console.log("Don't change a thing");
     } else {
-        myCurrentSquareDiv.style.backgroundColor = getRandomRGB();
+        myCurrentSquareDiv.style.backgroundColor = getRandomRGBA();
     }
+
 })
 
 function removeSquareDivs() {
