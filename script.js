@@ -1,4 +1,3 @@
-// // Create a reference to the HTML Objects
 const buttonContainer = document.querySelector("#button-container");
 const sketchContainer = document.createElement("div");
 sketchContainer.id = "sketch-container";
@@ -7,75 +6,110 @@ const column = document.createElement("div");
 const squareDiv = document.createElement("div");
 const refreshContainer = document.getElementById("refresh-container");
 
-
-button.textContent = "Press to enter the new grid size!"
+button.textContent = "Press to enter the new grid size!";
+button.id = "awesomeButton";
 buttonContainer.appendChild(button);
 
 let gridlength = 16;
 let columns = rows = gridlength;
 let currentSquareDiv = "squareDivId" + 1;
 let mouseOverSquareDiv;
+let input = 10;
+
+button.addEventListener("click", refreshGrid);
 
 function createGrid(gridlength) {
     refreshContainer.appendChild(sketchContainer);
-    //     let arr = [];
-        let value = 1;
-        let notANumber = "squareDivId";
+    let value = 1;
+    let notANumber = "squareDivId";
     for (let i = 0; i < gridlength; i++) {
-        // This for loop creates the amount of rows
-        // specified in the function argument rows
-        // and assignes an empty array for each row
         const column = document.createElement("div");
         column.classList.add("column");
-        // arr[i] = [];
-        // The following for loop creates the columns, it does so
-        // row by row, so it starts at row index 0 and populates
-        // this row until it is at the last specified column
         for (let j = 0; j < gridlength; j++) {
             const squareDiv = document.createElement("div");
             squareDiv.classList.add("squareDiv");
             squareDiv.id = currentSquareDiv;
             currentSquareDiv = notANumber + ++value;
             column.appendChild(squareDiv);
-            // arr[i][j] = createColumn();
         }
         sketchContainer.appendChild(column);
     }
 }
 
-createGrid(columns, rows);
+createGrid(gridlength);
 
-button.addEventListener("click", refreshGrid);
-
-// FIX please
-function removeOldGrid () {
-    refreshContainer.removeChild(sketchContainer);
-}
-
-// FIX please
-function refreshGrid() {
-    removeOldGrid()
-    let refreshedGridlength = prompt("Please enter a gridlength! Maximaler Value: 100");
-    refreshedGridlength = +refreshedGridlength;
-    console.log(refreshedGridlength);
-    createGrid(refreshedGridlength);
-    return;
-}
-
-// Listen for where the mouse pointer is currently and return the ID if the squareDiv
+// Listen for where the mouse pointer is currently and return the ID of the squareDiv
 window.addEventListener('mouseover', (e) => {
     const {
-      clientX: x,
-      clientY: y
+        clientX: x,
+        clientY: y
     } = e
     const elementMouseIsOver = document.elementFromPoint(x, y);
     let currentElementId = elementMouseIsOver.id;
     currentElementId = currentElementId.toString()
-    console.log(currentElementId);
     let myCurrentSquareDiv = document.getElementById(currentElementId);
-    myCurrentSquareDiv.style.backgroundColor = "blue";
-    return currentElementId
-  })
+    console.log(currentElementId);
+    if (currentElementId === null || currentElementId === "sketch-container" ||
+        currentElementId === "button-container" || currentElementId === "body" ||
+        currentElementId === "html" || currentElementId === "awesomeButton") {
+        console.log("Don't change a thing");
+    } else {
+        myCurrentSquareDiv.style.backgroundColor = "blue";
+    }
+})
+
+function removeSquareDivs() {
+    let squareDivsToRemove = document.getElementsByClassName("squareDiv");
+    for (let i = squareDivsToRemove.length - 1; i >= 0; i--) {
+        squareDivsToRemove[i].remove();
+    }
+}
+
+function removeColumns() {
+    let columnDivsToRemove = document.getElementsByClassName("column");
+    console.log(columnDivsToRemove);
+    for (let i = columnDivsToRemove.length - 1; i >= 0; i--) {
+        columnDivsToRemove[i].remove();
+    }
+}
+
+function removeOldGrid() {
+    removeSquareDivs();
+    removeColumns();
+    refreshContainer.removeChild(sketchContainer);
+}
+
+function refreshGrid() {
+    removeOldGrid();
+    input = parseInt(prompt("Only positive numbers < 100, digits after decimalpoint are cut off!: ", "1"), 10);
+    createGrid(inputCheck(input));
+}
+
+function inputCheck(input) {
+    let defaultValue = 16;
+    if (typeof (input) != 'number') {
+        alert("ERROR_1: please only positive whole numbers as input, anything after a decimalpoint will be cut off! -> defaultGrid");
+        input = defaultValue;
+        return input;
+    } else if (Number.isInteger(input) == false) {
+        alert("ERROR_2: please only positive whole numbers as input, anything after a decimalpoint will be cut off! -> defaultGrid");
+        input = defaultValue;
+        return input;
+    } else if (input <= 0) {
+        alert("ERROR_3: You have typed in zero or a negative number! -> defaultGrid");
+        input = defaultValue;
+        return input;
+    } else if (input > 100) {
+        alert("ERROR_4: You're iput was greater than 100.99...! -> defaultGrid");
+        input = defaultValue;
+        return input;
+    } else {
+        return input;
+    }
+}
+
+
+
 
 
 
