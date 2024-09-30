@@ -26,7 +26,7 @@ function getRandomRGBA() {
     const g = randomBetween(0, 255);
     const b = randomBetween(0, 255);
     rgba = `rgba(${r},${g},${b},${opacity})`;
-    console.log(rgba);
+    //console.log(rgba);
     return rgba;
 }
 
@@ -60,11 +60,10 @@ window.addEventListener('mouseover', (e) => {
     let currentElementId = elementMouseIsOver.id;
     currentElementId = currentElementId.toString()
     let myCurrentSquareDiv = document.getElementById(currentElementId);
-    console.log(currentElementId);
+    // console.log(currentElementId);
     if (currentElementId === null || currentElementId === "sketch-container" ||
         currentElementId === "button-container" || currentElementId === "body" ||
         currentElementId === "html" || currentElementId === "awesomeButton") {
-        console.log("Don't change a thing");
     } else {
         myCurrentSquareDiv.style.backgroundColor = getRandomRGBA();
     }
