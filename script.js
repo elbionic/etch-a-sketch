@@ -18,6 +18,15 @@ let input = 10;
 
 button.addEventListener("click", refreshGrid);
 
+function getRandomRGB() {
+    const randomBetween = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+    const r = randomBetween(0, 255);
+    const g = randomBetween(0, 255);
+    const b = randomBetween(0, 255);
+    const rgb = `rgb(${r},${g},${b})`;
+    return rgb;
+}
+
 function createGrid(gridlength) {
     refreshContainer.appendChild(sketchContainer);
     let value = 1;
@@ -54,7 +63,7 @@ window.addEventListener('mouseover', (e) => {
         currentElementId === "html" || currentElementId === "awesomeButton") {
         console.log("Don't change a thing");
     } else {
-        myCurrentSquareDiv.style.backgroundColor = "blue";
+        myCurrentSquareDiv.style.backgroundColor = getRandomRGB();
     }
 })
 
