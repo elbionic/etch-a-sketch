@@ -15,7 +15,7 @@ let columns = rows = gridlength;
 let currentSquareDiv = "squareDivId" + 1;
 let mouseOverSquareDiv;
 let input = 10;
-let rgba = "rgba(255,0,0,1)"; 36
+let rgba = "rgba(255,0,0,1)"; 
 let opacity = 1;
 
 button.addEventListener("click", refreshGrid);
@@ -98,7 +98,7 @@ function refreshGrid() {
 function inputCheck(input) {
     let defaultValue = 16;
     if (typeof (input) != 'number') {
-        alert("ERROR_1: please only positive whole numbers as input, anything after a decimalpoint will be cut off! -> defaultGrid");
+        alert("ERROR_1:  please only positive whole numbers as input, anything after a decimalpoint will be cut off! -> defaultGrid");
         input = defaultValue;
         return input;
     } else if (Number.isInteger(input) == false) {
@@ -120,7 +120,7 @@ function inputCheck(input) {
 
 const gridSquares = document.querySelectorAll(".squareDiv");
 
-gridSquares.forEach((square) => {
+let mouseOverFunction = gridSquares.forEach((square) => {
     let firstMouseOver = true;
 
     square.addEventListener('mouseover', () => {
