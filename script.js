@@ -15,7 +15,7 @@ let columns = rows = gridlength;
 let currentSquareDiv = "squareDivId" + 1;
 let mouseOverSquareDiv;
 let input = 10;
-let rgba = "rgba(255,0,0,1)";36
+let rgba = "rgba(255,0,0,1)"; 36
 let opacity = 1;
 
 button.addEventListener("click", refreshGrid);
@@ -26,7 +26,6 @@ function getRandomRGBA() {
     const g = randomBetween(0, 255);
     const b = randomBetween(0, 255);
     rgba = `rgba(${r},${g},${b},${opacity})`;
-    //console.log(rgba);
     return rgba;
 }
 
@@ -50,26 +49,6 @@ function createGrid(gridlength) {
 
 createGrid(gridlength);
 
-// Listen for where the mouse pointer is currently and return the ID of the squareDiv
-window.addEventListener('mouseover', (e) => {
-    const {
-        clientX: x,
-        clientY: y
-    } = e
-    const elementMouseIsOver = document.elementFromPoint(x, y);
-    let currentElementId = elementMouseIsOver.id;
-    currentElementId = currentElementId.toString()
-    let myCurrentSquareDiv = document.getElementById(currentElementId);
-    // console.log(currentElementId);
-    if (currentElementId === null || currentElementId === "sketch-container" ||
-        currentElementId === "button-container" || currentElementId === "body" ||
-        currentElementId === "html" || currentElementId === "awesomeButton" 
-        || currentElementId === "refresh-container") {
-    } else {
-        myCurrentSquareDiv.style.backgroundColor = getRandomRGBA();
-    }
-
-})
 
 function removeSquareDivs() {
     let squareDivsToRemove = document.getElementsByClassName("squareDiv");
@@ -96,6 +75,24 @@ function refreshGrid() {
     removeOldGrid();
     input = parseInt(prompt("Only positive numbers < 100, digits after decimalpoint are cut off!: ", "1"), 10);
     createGrid(inputCheck(input));
+    const gridSquares = document.querySelectorAll(".squareDiv")
+    gridSquares.forEach((square) => {
+        let firstMouseOver = true;
+        square.addEventListener('mouseover', () => {
+            if (square.style.opacity === '' || square.style.backgroundColor === '') {
+                firstMouseOver = true;
+            }
+            if (firstMouseOver) {
+                square.style.backgroundColor = getRandomRGBA();
+                square.style.opacity = 0.1;
+            } else {
+                square.style.opacity = Math.min(parseFloat(square.style.opacity) + 0.1, 1);
+            }
+        });
+        square.addEventListener('mouseleave', () => {
+            firstMouseOver = false;
+        });
+    });
 }
 
 function inputCheck(input) {
@@ -120,6 +117,29 @@ function inputCheck(input) {
         return input;
     }
 }
+
+const gridSquares = document.querySelectorAll(".squareDiv");
+
+gridSquares.forEach((square) => {
+    let firstMouseOver = true;
+
+    square.addEventListener('mouseover', () => {
+        if (square.style.opacity === '' || square.style.backgroundColor === '') {
+            firstMouseOver = true;
+        }
+        if (firstMouseOver) {
+            square.style.backgroundColor = getRandomRGBA();
+            square.style.opacity = 0.1;
+        } else {
+            square.style.opacity = Math.min(parseFloat(square.style.opacity) + 0.1, 1);
+        }
+    });
+
+    square.addEventListener('mouseleave', () => {
+        firstMouseOver = false;
+    });
+});
+
 
 
 
