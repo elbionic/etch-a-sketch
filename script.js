@@ -15,7 +15,7 @@ let columns = rows = gridlength;
 let currentSquareDiv = "squareDivId" + 1;
 let mouseOverSquareDiv;
 let input = 10;
-let rgba = "rgba(255,0,0,1)";
+let rgba = "rgba(255,0,0,1)";36
 let opacity = 1;
 
 button.addEventListener("click", refreshGrid);
@@ -63,7 +63,8 @@ window.addEventListener('mouseover', (e) => {
     // console.log(currentElementId);
     if (currentElementId === null || currentElementId === "sketch-container" ||
         currentElementId === "button-container" || currentElementId === "body" ||
-        currentElementId === "html" || currentElementId === "awesomeButton") {
+        currentElementId === "html" || currentElementId === "awesomeButton" 
+        || currentElementId === "refresh-container") {
     } else {
         myCurrentSquareDiv.style.backgroundColor = getRandomRGBA();
     }

@@ -3,24 +3,31 @@
     margin: 0;
     padding: 0;
     max-width: 1900px;
-    /* outline: 2px solid red; */
+    outline: 2px solid red;
 }
 
-
-
-#sketch-container {
-    padding: 8px;
+#refresh-container {
     display: flex;
     justify-content: center;
+}
+
+#sketch-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 960px;
+    height: 960px;
+}
+
+.column {
+    display: flex;
+    flex: 1;
 }
 
 .squareDiv {
     background-color: lightblue;
     margin: 0;
-    padding: 5px;
     border: .5px solid grey;
-    height: 15px;
-    width: 15px; 
     flex: 1;
 }
 
